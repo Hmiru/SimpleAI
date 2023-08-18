@@ -1,17 +1,36 @@
 from pre_proc import PreProcessing, ImageInfo, DatasetInfo
+from model import build_model
+from evaluation import debugging_function
+from execution import fit
+import sys
+class ClassificationModel:
+    def __init__(self):
+        self.test_ds = None
+        self.valid_ds = None
+        self.train_ds = None
+        self.image_info = ImageInfo(image_height=224, image_width=224)
+        self.dataset_info = DatasetInfo(validation_split=0.3, batch_size=32, seed=188)
+        self.image_path = "C:\\Users\\mirun\\PycharmProjects\\PhotoTimestamp-AI\\for_vision\\animal_face\\classification_image"
 
 
+    def preprocess(self):
+        preprocessor = PreProcessing(self.image_path, self.image_info, self.dataset_info)
+        preprocessor.get_dataset_through_all_procedure()
+        self.train_ds = preprocessor.train_ds
+        self.valid_ds = preprocessor.valid_ds
+        self.test_ds = preprocessor.test_ds
+
+    def train(self):
+        model = build_model(base_hidden_units=16, weight_decay=1e-4,input_width=self.image_info.image_width,input_height=self.image_info.image_height)  # 모델 생성하기
+        fit(self.train_ds, self.valid_ds, model)
 def main():
+    clmo = ClassificationModel()
+    clmo.preprocess()
+    clmo.train()
 
-    image_info = ImageInfo(image_height=224, image_width=224) 
-    dataset_info = DatasetInfo(validation_split=0.3, batch_size=32, seed=188)
-    image_path = "C:/Users/mirun/PycharmProjects/pythonProject/CV/for_vision/animal_face/classification_image"
-    preprocessor = PreProcessing(image_path, image_info, dataset_info) # 전처리용 객체 만드는게 이런거?
-    preprocessor.get_dataset_through_all_procedure()
-
-    train_ds = preprocessor.train_ds
-    valid_ds = preprocessor.valid_ds
-    test_ds = preprocessor.test_ds
+    if 'debug' in sys.argv:
+        print("디버그")
+        debugging_function(ClassificationModel.model,ClassificationModel.test_ds)
 
 
 if __name__ == "__main__":
