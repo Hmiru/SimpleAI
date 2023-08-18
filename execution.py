@@ -9,7 +9,7 @@ def fit(train_ds,valid_ds,model):
 
   checkpointer=ModelCheckpoint(filepath='model.100epochs.hdf5', verbose=1,
                               save_best_only=True)
-  optimizer=keras.optimizers.Adam(lr=0.0001,decay=1e-6)
+  optimizer=keras.optimizers.legacy.Adam(lr=0.0001,decay=1e-6)
 
   model.compile(loss='categorical_crossentropy',optimizer=optimizer,
                 metrics=['accuracy'])

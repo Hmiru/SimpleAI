@@ -8,10 +8,12 @@ class ClassificationModel:
         self.test_ds = None
         self.valid_ds = None
         self.train_ds = None
+        self.model = None
         self.image_info = ImageInfo(image_height=224, image_width=224)
         self.dataset_info = DatasetInfo(validation_split=0.3, batch_size=32, seed=188)
-        self.image_path = "C:\\Users\\mirun\\PycharmProjects\\PhotoTimestamp-AI\\for_vision\\animal_face\\classification_image"
+       #self.image_path = "C:\\Users\\mirun\\PycharmProjects\\PhotoTimestamp-AI\\for_vision\\animal_face\\classification_image"
 
+        self.image_path = "C:\\Users\\mirun\\PycharmProjects\\PhotoTimestamp-AI\\for_vision\\handphone"
 
     def preprocess(self):
         preprocessor = PreProcessing(self.image_path, self.image_info, self.dataset_info)
@@ -21,16 +23,19 @@ class ClassificationModel:
         self.test_ds = preprocessor.test_ds
 
     def train(self):
-        model = build_model(base_hidden_units=16, weight_decay=1e-4,input_width=self.image_info.image_width,input_height=self.image_info.image_height)  # 모델 생성하기
-        fit(self.train_ds, self.valid_ds, model)
+        self.model = build_model(base_hidden_units=16, weight_decay=1e-4,input_width=self.image_info.image_width,input_height=self.image_info.image_height)  # 모델 생성하기
+        fit(self.train_ds, self.valid_ds, self.model)
 def main():
     clmo = ClassificationModel()
-    clmo.preprocess()
-    clmo.train()
 
-    if 'debug' in sys.argv:
-        print("디버그")
-        debugging_function(ClassificationModel.model,ClassificationModel.test_ds)
+    if 'fit' in sys.argv:
+        print("학습 모드")
+        clmo.preprocess()
+        clmo.train()
+
+    elif 'debug' in sys.argv:
+        print("디버그 모드")
+        debugging_function(clmo.model, clmo.test_ds)
 
 
 if __name__ == "__main__":
