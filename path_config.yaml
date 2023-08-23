@@ -1,0 +1,5 @@
+
+#필요한 이미지 데이터셋의 경로를 담은 파일
+
+handphone_image_path : "C:\\Users\\mirun\\PycharmProjects\\PhotoTimestamp-AI\\for_vision\\handphone"
+animal_face : "C:\\Users\\mirun\\PycharmProjects\\PhotoTimestamp-AI\\for_vision\\animal_face\\classification_image"
