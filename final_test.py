@@ -1,5 +1,5 @@
-from matplotlib import pyplot
 
+from matplotlib import pyplot
 
 class Debugger:
     @staticmethod
@@ -13,3 +13,4 @@ class Debugger:
     def check_test_performance(build_model, test_ds):
         scores = build_model.evaluate(test_ds, batch_size=128, verbose=1)
         print('\nTest result : %.3f loss:%.3f' % (scores[1] * 100, scores[0]))
+

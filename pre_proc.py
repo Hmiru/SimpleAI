@@ -1,7 +1,10 @@
 '''
 불러온 데이터셋으로 전처리를 하는 클래스
 '''
+from typing import List
+
 import tensorflow as tf
+
 from data_loader import *
 
 class PreProcessing:
@@ -9,24 +12,29 @@ class PreProcessing:
         self.train_ds = train_ds
         self.valid_ds = valid_ds
         self.test_ds = test_ds
-        self.normalization_layer = tf.keras.layers.Normalization()
+
+        self.preprocess_methods = [self.normalize, self.shuffle]
 
     def get_dataset_through_preprocessed(self) -> Tuple[tf.data.Dataset, tf.data.Dataset, tf.data.Dataset]:
-        self.__normalize()
-        self.__shuffle()
+        for preprocess_method in self.preprocess_methods:
+            self.train_ds, self.valid_ds, self.test_ds = preprocess_method(self.train_ds, self.valid_ds, self.test_ds)
         return self.train_ds, self.valid_ds, self.test_ds
 
-    def __normalize(self):
-        for images, _ in self.train_ds:
-            self.normalization_layer.adapt(images)
+    def normalize(self, train, valid, test):
+        normalization_layer = tf.keras.layers.Normalization()
+        for images, _ in train:
+            normalization_layer.adapt(images)
 
-        self.train_ds = self.train_ds.map(lambda x, y: (self.normalization_layer(x), y))
-        self.valid_ds = self.valid_ds.map(lambda x, y: (self.normalization_layer(x), y))
-        self.test_ds = self.test_ds.map(lambda x, y: (self.normalization_layer(x), y))
-        return self
+        train = train.map(lambda x, y: (normalization_layer(x), y))
+        valid = valid.map(lambda x, y: (normalization_layer(x), y))
+        test = test.map(lambda x, y: (normalization_layer(x), y))
+        return train, valid, test
 
-    def __shuffle(self):
-        self.train_ds = self.train_ds.shuffle(buffer_size=1000).prefetch(buffer_size=tf.data.experimental.AUTOTUNE)
-        self.valid_ds = self.valid_ds.shuffle(buffer_size=1000).prefetch(buffer_size=tf.data.experimental.AUTOTUNE)
-        self.test_ds = self.test_ds.prefetch(buffer_size=tf.data.experimental.AUTOTUNE)
-        return self
+    def shuffle(self, train , valid, test):
+        train = train.shuffle(buffer_size=1000).prefetch(buffer_size=tf.data.experimental.AUTOTUNE)
+        valid = valid.shuffle(buffer_size=1000).prefetch(buffer_size=tf.data.experimental.AUTOTUNE)
+        test = test.prefetch(buffer_size=tf.data.experimental.AUTOTUNE)
+        return train, valid, test
+
+    def set_preprocess_methods(self, methods: List[callable]):
+        self.preprocess_methods = methods
