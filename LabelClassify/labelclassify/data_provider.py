@@ -1,6 +1,6 @@
 import abc
 
-class Provider:
+class DataProvider:
     def __init__(self, image_num: int):
         self._image_num = image_num
 

@@ -1,6 +1,6 @@
-from provider_from_dir import ProviderFromDir
+from data_provider_from_dir import DataProviderFromDir
 
-class EXIFProviderFromDir(ProviderFromDir):
+class EXIFProviderFromDir(DataProviderFromDir):
     def __init__(self, image_num: int):
         super().__init__(image_num, "EXIF")
         self.__file_content_arr = []
@@ -12,7 +12,7 @@ class EXIFProviderFromDir(ProviderFromDir):
         self.__parse_to_dic()
 
     def __read_file(self):
-        with open(self._file_location, "r") as f:
+        with open(self.file_location(), "r") as f:
             self.__file_content_arr = f.readlines()
 
     def __parse_to_dic(self):

@@ -6,20 +6,30 @@
 #   - 10,000장씩 100개의 디렉토리로 나누어짐 (0~99)
 #   - 각 파일 명은 번호임
 
-from provider import Provider
+from data_provider import DataProvider
 import yaml
 import abc
 
-class ProviderFromDir(Provider):
+class DataProviderFromDir(DataProvider):
     def __init__(self, image_num: int, type: str):
         super().__init__(image_num)
-        self.type = type
-        self._dir_location = ""
-        self._file_location = ""
+        self.__type = type
+        self.__dir_location = ""
+        self.__file_location = ""
+        self.__file_format = ""
+        self.__set_file_format()
         self.__load__File_name()
 
     def file_location(self) -> str:
         return self._file_location
+
+    def __set_file_format(self):
+        if self.__type == "EXIF":
+            self.__file_format = ".txt"
+        elif self.__type == "Image":
+            self.__file_format = ".jpg"
+        else:
+            self.__file_format = ""
         
     def __load__File_name(self):
         self.__load_dir_location()
@@ -29,13 +39,13 @@ class ProviderFromDir(Provider):
     def __load_dir_location(self):
         with open('propertise.yaml', "r") as f:
             propertise = yaml.full_load(f)
-            self._dir_location = propertise['location'][self.type]
+            self._dir_location = propertise['location'][self.__type]
 
     def __make_file_location(self):
         sub_dir = str(self._image_num // 10000)
         self._file_location = self._dir_location + "/" +\
                                      sub_dir + "/" +\
-                                     str(self._image_num) + ".txt" 
+                                     str(self._image_num) + self.__file_format 
 
 def main():
     test_exif = ProviderFromDir(22222, "EXIF")
