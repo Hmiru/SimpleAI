@@ -1,4 +1,5 @@
 from data_provider_from_dir import DataProviderFromDir
+import sys
 
 class EXIFProviderFromDir(DataProviderFromDir):
     def __init__(self, image_num: int):
@@ -12,8 +13,11 @@ class EXIFProviderFromDir(DataProviderFromDir):
         self.__parse_to_dic()
 
     def __read_file(self):
-        with open(self.file_location(), "r") as f:
-            self.__file_content_arr = f.readlines()
+        try:
+            with open(self.file_location(), "r") as f:
+                self.__file_content_arr = f.readlines()
+        except FileNotFoundError as e:
+            print(e, file=sys.stderr)
 
     def __parse_to_dic(self):
         for i in range(0, len(self.__file_content_arr), 2):
