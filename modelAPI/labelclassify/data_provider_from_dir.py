@@ -9,6 +9,7 @@
 from data_provider import DataProvider
 import yaml
 import abc
+import os.path
 
 class DataProviderFromDir(DataProvider):
     def __init__(self, image_num: int, type: str):
@@ -37,7 +38,7 @@ class DataProviderFromDir(DataProvider):
         pass
 
     def __load_dir_location(self):
-        with open('propertise.yaml', "r") as f:
+        with open(os.path.dirname(__file__) + '/../propertise.yaml') as f:
             propertise = yaml.full_load(f)
             self._dir_location = propertise['location'][self.__type]
 

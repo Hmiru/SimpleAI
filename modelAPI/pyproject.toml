@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "labelclassify"
+name = "modelapi"
 version = "0.1.0"
 description = ""
 authors = ["Lee Junhee <junhee0110@gmail.com>"]
