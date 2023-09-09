@@ -1,5 +1,6 @@
 from labelclassify.data_provider_from_dir import DataProviderFromDir
 import sys
+import chardet
 
 class EXIFProviderFromDir(DataProviderFromDir):
     def __init__(self, image_num: int):
@@ -14,7 +15,7 @@ class EXIFProviderFromDir(DataProviderFromDir):
 
     def __read_file(self):
         try:
-            with open(self.file_location(), "r") as f:
+            with open(self.file_location(), "r", encoding="iso-8859-1") as f:
                 self.__file_content_arr = f.readlines()
         except FileNotFoundError as e:
             print(e, file=sys.stderr)

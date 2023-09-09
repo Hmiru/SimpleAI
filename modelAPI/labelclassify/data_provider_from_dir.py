@@ -35,10 +35,10 @@ class DataProviderFromDir(DataProvider):
             self._dir_location = propertise['location'][self.__type]
 
     def __make_file_location(self):
-        sub_dir = str(self._image_num // 10000)
+        sub_dir = str(self.image_num() // 10000)
         self._file_location = self._dir_location + "/" +\
                                      sub_dir + "/" +\
-                                     str(self._image_num) + self.__file_format 
+                                     str(self.image_num()) + self.__file_format 
 
 def main():
     test_exif = ProviderFromDir(22222, "EXIF")

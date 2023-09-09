@@ -6,23 +6,19 @@ from typing import Final
 TIME_BOUNDARY_DIC : Final[TimeBoundaryDic] = {
     "Spring": {
         "Morning": TimeRange(time(5,34), time(12,33)),
-        "Afternoon": TimeRange(time(12,33), time(19,35)),
-        "Night": TimeRange(time(19,35), time(5,34))
+        "Afternoon": TimeRange(time(12,33), time(19,35))
     },
     "Summer": {
         "Morning": TimeRange(time(4, 58), time(12,34)),
-        "Afternoon": TimeRange(time(12,34), time(20,9)),
-        "Night": TimeRange(time(20,9), time(4, 58))
+        "Afternoon": TimeRange(time(12,34), time(20,9))
     },
     "Autumn": {
         "Morning": TimeRange(time(6,18), time(12,23)),
-        "Afternoon": TimeRange(time(12,23), time(18,26)),
-        "Night": TimeRange(time(18,26), time(6,18))
+        "Afternoon": TimeRange(time(12,23), time(18,26))
     },
     "Winter": {
         "Morning": TimeRange(time(7,5), time(12,37)),
-        "Afternoon": TimeRange(time(12,37), time(18,10)),
-        "Night": TimeRange(time(18,10), time(7,5))
+        "Afternoon": TimeRange(time(12,37), time(18,10))
     },
 }
 
@@ -57,7 +53,7 @@ class LabelClassifierFromBoundary(LabelClassifier):
             self.__label = self.__season + "_" + "Morning"
         elif self.__in_range_of_when("Afternoon"):
             self.__label = self.__season + "_" + "Afternoon"
-        elif self.__in_range_of_when("Night"):
+        else:
             self.__label = self.__season + "_" + "Night"
 
     def __in_range_of_when(self, time_range: str):
@@ -71,7 +67,7 @@ class LabelClassifierFromBoundary(LabelClassifier):
             time = datetime.strptime(strf, "%Y:%m:%d %H:%M:%S")
             return LabelClassifierFromBoundary(time, time_boundary_dic)
         except ValueError as e:
-            print(e, file=sys.stderr)
+            raise ValueError
 
     def label(self)->str:
         return self.__label

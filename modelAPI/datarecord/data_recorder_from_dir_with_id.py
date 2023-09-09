@@ -27,6 +27,9 @@ class DataRecorderFromDirWithID(DataRecorder):
         except ValueError: # String format to Datetime 변환 실패
             self.__label = "Unknown"
 
+    def id(self):
+        return self.__id
+
     def image_location(self):
         return self.__image_location
     
@@ -35,8 +38,8 @@ class DataRecorderFromDirWithID(DataRecorder):
 
 
 def main():
-    id = 33
-    dr = DataRecorderFromID(id)
+    id = int(input("Image num: "))
+    dr = DataRecorderFromDirWithID(id)
     print("ID : {}".format(id))
     print("Image Location: {}".format(dr.image_location()))
     print("Label : {}".format(dr.label()))
