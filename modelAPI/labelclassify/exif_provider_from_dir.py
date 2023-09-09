@@ -1,4 +1,4 @@
-from data_provider_from_dir import DataProviderFromDir
+from labelclassify.data_provider_from_dir import DataProviderFromDir
 import sys
 
 class EXIFProviderFromDir(DataProviderFromDir):

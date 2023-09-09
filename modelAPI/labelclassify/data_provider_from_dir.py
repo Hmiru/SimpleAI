@@ -1,12 +1,4 @@
-# 파일명: EXIFProviderFromDir.py
-# 목적: EXIF를 파일로부터 불러오는 EXIFProvider의 구현체 
-# 메모 사항:
-#   - 서버 내에서 이미지와 EXIF 디렉토리 구조
-#   - 총 100만 장의 파일이 있음
-#   - 10,000장씩 100개의 디렉토리로 나누어짐 (0~99)
-#   - 각 파일 명은 번호임
-
-from data_provider import DataProvider
+from labelclassify.data_provider import DataProvider
 import yaml
 import abc
 import os.path

@@ -1,5 +1,5 @@
-from label_classifier import LabelClassifier
-from time_boundary import *
+from labelclassify.label_classifier import LabelClassifier
+from labelclassify.time_boundary import *
 from datetime import datetime
 from typing import Final
 
@@ -66,10 +66,10 @@ class LabelClassifierFromBoundary(LabelClassifier):
         return is_between(photoed_time, boundary.start(), boundary.end())
 
     @staticmethod
-    def fromStringFormat(strf):
+    def fromStringFormat(strf: str, time_boundary_dic: TimeBoundaryDic):
         try:
             time = datetime.strptime(strf, "%Y:%m:%d %H:%M:%S")
-            return LabelClassifierFromBoundary(time)
+            return LabelClassifierFromBoundary(time, time_boundary_dic)
         except ValueError as e:
             print(e, file=sys.stderr)
 
