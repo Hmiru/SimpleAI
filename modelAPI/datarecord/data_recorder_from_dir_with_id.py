@@ -7,7 +7,7 @@ from labelclassify.data_provider_from_dir import DataProviderFromDir
 from labelclassify.exif_provider_from_dir import EXIFProviderFromDir
 from labelclassify.label_classifier_from_boundary import *
 
-class DataRecorderFromID(DataRecorder):
+class DataRecorderFromDirWithID(DataRecorder):
     def __init__(self, id: int):
         self.__id = id
         self.__image_location = DataProviderFromDir(self.__id, "Image").file_location()
