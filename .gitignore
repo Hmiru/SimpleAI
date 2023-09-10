@@ -1,2 +1,4 @@
 __pycache__
 propertise.yaml
+.env
+MySQL_dev/db/*
