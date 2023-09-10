@@ -1,0 +1,28 @@
+services:
+  python:
+    image: iamjunhee/phototimestamp-modelapi:latest
+    build: .
+    volumes:
+      - type: bind
+        source: ./modelAPI
+        target: /root/src/modelAPI
+    networks:
+      - pysql
+    depends_on:
+      - mysql
+
+  mysql:
+    image: iamjunhee/phototimestamp-mysql:flask-dev
+    build: ./MySQL_dev
+    environment:
+      - MYSQL_ROOT_PASSWORD=$MYSQL_ROOT_PASSWORD
+    volumes:
+      - type: bind
+        source: ./MySQL_dev/db
+        target: /var/lib/mysql
+    networks:
+      - pysql
+
+networks:
+  pysql:
+    driver: bridge
