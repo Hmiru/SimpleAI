@@ -1,9 +1,13 @@
-from labelclassify.data_provider import DataProvider
+import os
+import sys
+sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
+
+from dataprovide.data_provider_by_id import DataProviderByID
 import yaml
 import abc
 import os.path
 
-class DataProviderFromDir(DataProvider):
+class DataProviderByIDFromDir(DataProviderByID):
     def __init__(self, image_num: int, type: str):
         super().__init__(image_num)
         self.__type = type
