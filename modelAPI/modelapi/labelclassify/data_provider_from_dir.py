@@ -1,14 +1,7 @@
-# 파일명: EXIFProviderFromDir.py
-# 목적: EXIF를 파일로부터 불러오는 EXIFProvider의 구현체 
-# 메모 사항:
-#   - 서버 내에서 이미지와 EXIF 디렉토리 구조
-#   - 총 100만 장의 파일이 있음
-#   - 10,000장씩 100개의 디렉토리로 나누어짐 (0~99)
-#   - 각 파일 명은 번호임
-
-from data_provider import DataProvider
+from labelclassify.data_provider import DataProvider
 import yaml
 import abc
+import os.path
 
 class DataProviderFromDir(DataProvider):
     def __init__(self, image_num: int, type: str):
@@ -37,15 +30,15 @@ class DataProviderFromDir(DataProvider):
         pass
 
     def __load_dir_location(self):
-        with open('propertise.yaml', "r") as f:
+        with open(os.path.dirname(__file__) + '/../../propertise.yaml') as f:
             propertise = yaml.full_load(f)
             self._dir_location = propertise['location'][self.__type]
 
     def __make_file_location(self):
-        sub_dir = str(self._image_num // 10000)
+        sub_dir = str(self.image_num() // 10000)
         self._file_location = self._dir_location + "/" +\
                                      sub_dir + "/" +\
-                                     str(self._image_num) + self.__file_format 
+                                     str(self.image_num()) + self.__file_format 
 
 def main():
     test_exif = ProviderFromDir(22222, "EXIF")
