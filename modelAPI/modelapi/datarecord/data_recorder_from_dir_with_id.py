@@ -2,7 +2,7 @@ import os
 import sys
 sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
 
-from data_recorder import DataRecorder
+from datarecord.data_recorder import DataRecorder
 from labelclassify.data_provider_from_dir import DataProviderFromDir
 from labelclassify.exif_provider_from_dir import EXIFProviderFromDir
 from labelclassify.label_classifier_from_boundary import *

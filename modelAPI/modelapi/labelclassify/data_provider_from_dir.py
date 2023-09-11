@@ -30,7 +30,7 @@ class DataProviderFromDir(DataProvider):
         pass
 
     def __load_dir_location(self):
-        with open(os.path.dirname(__file__) + '/../propertise.yaml') as f:
+        with open(os.path.dirname(__file__) + '/../../propertise.yaml') as f:
             propertise = yaml.full_load(f)
             self._dir_location = propertise['location'][self.__type]
 

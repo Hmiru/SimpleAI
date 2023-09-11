@@ -6,6 +6,9 @@ services:
       - type: bind
         source: ./modelAPI
         target: /root/src/modelAPI
+      - type: bind
+        source: /home/junhee0110/Phototimestamp_data/mirflickr/
+        target: /root/data
     networks:
       - pysql
     depends_on:
