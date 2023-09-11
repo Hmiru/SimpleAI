@@ -46,6 +46,14 @@ class DatasetRepositry:
         raise NotImplemented
 
     @abc.abstractmethod
+    def count(self) -> int:
+        raise NotImplemented
+
+    @abc.abstractmethod
+    def count_label(self, label: str) -> int:
+        raise NotImplemented
+
+    @abc.abstractmethod
     def commit(self):
         raise NotImplemented
 
