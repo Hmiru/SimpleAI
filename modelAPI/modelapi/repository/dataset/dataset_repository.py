@@ -1,4 +1,8 @@
-from repository.dataset.dataset_dto import DataDTO, DatasetDTO
+import os
+import sys
+sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
+
+from repository.dataset.data_dto import DataDTO, DatasetDTO
 import abc
 
 class DatasetRepositry:
@@ -14,35 +18,35 @@ class DatasetRepositry:
         raise NotImplemented
 
     @abc.abstractmethod
-    def get(id: int)->DataDTO:
+    def get(self, id: int)->DataDTO:
         raise NotImplemented
 
     @abc.abstractmethod
-    def get_list(id: list[int])->DatasetDTO:
+    def get_list(self, id: list[int])->DatasetDTO:
         raise NotImplemented
 
     @abc.abstractmethod
-    def get_all()->DatasetDTO:
+    def get_all(self, )->DatasetDTO:
         raise NotImplemented
 
     @abc.abstractmethod
-    def get_all_with_label(label: str)->DatasetDTO:
+    def get_all_with_label(self, label: str)->DatasetDTO:
         raise NotImplemented
 
     @abc.abstractmethod
-    def delete(id: int)->DataDTO:
+    def delete(self, id: int)->DataDTO:
         raise NotImplemented
 
     @abc.abstractmethod
-    def delete_list(id: list[int])->DatasetDTO:
+    def delete_list(self, id: list[int])->DatasetDTO:
         raise NotImplemented
 
     @abc.abstractmethod
-    def update(id: int, dto: DataDTO)->DataDTO:
+    def update(self, id: int, dto: DataDTO)->DataDTO:
         raise NotImplemented
 
     @abc.abstractmethod
-    def update_list(id: list[int], dto: DatasetDTO)->DatasetDTO:
+    def commit(self):
         raise NotImplemented
 
     

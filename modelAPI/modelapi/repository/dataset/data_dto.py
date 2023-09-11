@@ -6,4 +6,10 @@ class DataDTO:
         self.label = label
         self.image_location = image_location
 
+    def values(self):
+        return self.label, self.image_location
+
+    def __str__(self):
+        return "label : {}\nimage_location : {}".format(self.label, self.image_location)
+
 DatasetDTO = list[DataDTO]
