@@ -1,7 +1,3 @@
-import os
-import sys
-sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
-
 from datarecord.data_recorder import DataRecorder
 from dataprovide.data_provider_by_id_from_dir import DataProviderByIDFromDir
 from dataprovide.exif_provider_by_id_from_dir import EXIFProviderByIDFromDir

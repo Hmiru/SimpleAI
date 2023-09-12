@@ -1,7 +1,3 @@
-import os
-import sys
-sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
-
 from datarecord.data_recorder_from_dir_with_id import DataRecorderFromDirWithID
 from repository.dataset.mysql_dataset_repository import MySQLDatasetRepository, DataDTO
 from pymysql.connections import Connection
