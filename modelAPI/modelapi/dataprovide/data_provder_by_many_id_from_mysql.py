@@ -1,9 +1,5 @@
-import os
-import sys
-sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
-
 from dataprovide.data_provider_by_many_id import DataProviderByManyID
-from pysql.connections import Connection
+from pymysql.connections import Connection
 from repository.dataset.mysql_dataset_repository import MySQLDatasetRepository
 from repository.dataset.data_dto import DataDTO, DatasetDTO
 from copy import deepcopy

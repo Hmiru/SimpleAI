@@ -9,13 +9,17 @@ class DataProviderByIDFromDir(DataProviderByID):
         super().__init__(image_num)
         self.__type = type
         self.__dir_location = ""
+        self.__sub_location = ""
         self.__file_location = ""
         self.__file_format = ""
         self.__set_file_format()
         self.__load__File_name()
 
     def file_location(self) -> str:
-        return self._file_location
+        return self.__file_location
+
+    def sub_location(self) -> str:
+        return self.__sub_location
 
     def __set_file_format(self):
         if self.__type == "EXIF":
@@ -32,13 +36,12 @@ class DataProviderByIDFromDir(DataProviderByID):
 
     def __load_dir_location(self):
         propertise = PropertiseLoader().get()
-        self._dir_location = propertise['location'][self.__type]
+        self.__dir_location = propertise['location'][self.__type]
 
     def __make_file_location(self):
         sub_dir = str(self.image_num() // 10000)
-        self._file_location = self._dir_location + "/" +\
-                                     sub_dir + "/" +\
-                                     str(self.image_num()) + self.__file_format 
+        self.__sub_location = sub_dir + "/" + str(self.image_num()) + self.__file_format 
+        self.__file_location = self.__dir_location + "/" + self.__sub_location
 
 def main():
     test_exif = ProviderFromDir(22222, "EXIF")

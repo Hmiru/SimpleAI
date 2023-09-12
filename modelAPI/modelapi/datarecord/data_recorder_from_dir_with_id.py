@@ -6,7 +6,7 @@ from labelclassify.label_classifier_from_boundary import *
 class DataRecorderFromDirWithID(DataRecorder):
     def __init__(self, id: int):
         self.__id = id
-        self.__image_location = DataProviderByIDFromDir(self.__id, "Image").file_location()
+        self.__image_location = DataProviderByIDFromDir(self.__id, "Image").sub_location()
         self.__label = None
         self.__get_label()
 

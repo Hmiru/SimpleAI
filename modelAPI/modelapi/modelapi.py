@@ -1,6 +1,8 @@
 from pymysql import connect
 from datarecord.mysql_recorder_from_dir_with_id import MySQLRecorderFromDirWithID
 from repository.dataset.mysql_dataset_repository import MySQLDatasetRepository
+from dataprovide.Image_data_provider_by_many_id_from_mysql import ImageDataProviderByManyIdFromMySQL
+import sys, os
 
 def main():
     db = connect(host = "mysql", user = "root", password = "1234", database = "model_db")
@@ -10,18 +12,15 @@ def main():
 
     db.commit()
 
-    repo = MySQLDatasetRepository(db)
+    img_ids = [2, 24, 5, 55, 62]
+    image_provider = ImageDataProviderByManyIdFromMySQL(img_ids, db)
 
-    print("LABEL: Summer_Night")
-    dtos = repo.get_all_with_label("Summer_Night")
+    image_dtos = image_provider.get()
 
-    for i in dtos:
-        print(i)
+    for i in range(len(image_dtos)):
+        image_dtos[i].image.save(os.path.dirname(sys.argv[0]) + "/temp_resource/%d.jpg" % i)
 
-    print("All datas : %i" % repo.count())
-    print("Summer_Morning datas : %i" % repo.count_label("Summer_Morning"))
-    print("Summer_Afternoon datas : %i" % repo.count_label("Summer_Afternoon"))
-    print("Summer_Night datas : %i" % repo.count_label("Summer_Night"))
+    db.close()
 
 
 if __name__ == "__main__":
