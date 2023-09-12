@@ -1,7 +1,3 @@
-import os
-import sys
-sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
-
 from repository.dataset.data_dto import DataDTO, DatasetDTO
 import abc
 
@@ -43,6 +39,14 @@ class DatasetRepositry:
 
     @abc.abstractmethod
     def update(self, id: int, dto: DataDTO)->DataDTO:
+        raise NotImplemented
+
+    @abc.abstractmethod
+    def count(self) -> int:
+        raise NotImplemented
+
+    @abc.abstractmethod
+    def count_label(self, label: str) -> int:
         raise NotImplemented
 
     @abc.abstractmethod

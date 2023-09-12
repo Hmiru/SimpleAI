@@ -1,8 +1,5 @@
-import os
-import sys
-sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
-
 from datarecord.data_recorder_from_dir_with_id import DataRecorderFromDirWithID
+from propertise.propertise_loader import PropertiseLoader
 import yaml
 import shutil
 
@@ -13,9 +10,8 @@ class DirectoryRecorderFromDirWithID(DataRecorderFromDirWithID):
         self.__get_image_dir()
 
     def __get_image_dir(self):
-        with open(os.path.dirname(__file__) + '/../propertise.yaml') as f:
-            propertise = yaml.full_load(f)
-            self.__image_dir = propertise['location']["Image"]
+        propertise = PropertiseLoader.get()
+        self.__image_dir = propertise['location']["Image"]
 
     def record(self):
         self.to_label_dir()

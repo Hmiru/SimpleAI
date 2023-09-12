@@ -1,8 +1,8 @@
-from labelclassify.data_provider_from_dir import DataProviderFromDir
+from dataprovide.data_provider_by_id_from_dir import DataProviderByIDFromDir
 import sys
 import chardet
 
-class EXIFProviderFromDir(DataProviderFromDir):
+class EXIFProviderByIDFromDir(DataProviderByIDFromDir):
     def __init__(self, image_num: int):
         super().__init__(image_num, "EXIF")
         self.__file_content_arr = []

@@ -1,7 +1,3 @@
-import os
-import sys
-sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
-
 from repository.dataset.dataset_repository import DatasetRepositry
 from repository.dataset.data_dto import DataDTO, DatasetDTO
 from pymysql.connections import Connection
@@ -17,6 +13,8 @@ class MySQLDatasetRepository(DatasetRepositry):
     __SELECT_QUERY_BASE = "SELECT label, image_location FROM " +__TABLE
     __DELETE_QUERY_BASE = "DELETE FROM " + __TABLE
     __UPDATE_QUERY = "UPDATE " + __TABLE + " SET label = %s, image_location = %s WHERE id = %s"
+    __COUNT_QUERY_BASE = "SELECT COUNT(*) FROM " + __TABLE
+
     def __init__(self, connection: Connection):
         self.__connection = connection
         self.__cursor = self.__connection.cursor()
@@ -111,6 +109,19 @@ class MySQLDatasetRepository(DatasetRepositry):
         self.__cursor.execute(self.__UPDATE_QUERY, (dto.label, dto.image_location, id))
 
         return dto_before
+
+    def count(self)->int:
+        self.__cursor.execute(self.__COUNT_QUERY_BASE)
+        result = self.__cursor.fetchone()
+
+        return int(result[0])
+
+    def count_label(self, label: str) -> int:
+        query = self.__COUNT_QUERY_BASE + " WHERE label = %s"
+        self.__cursor.execute(query, label)
+        result = self.__cursor.fetchone()
+
+        return int(result[0])
     
     def commit(self):
         self.__connection.commit()
