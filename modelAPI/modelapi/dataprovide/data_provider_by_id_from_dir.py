@@ -1,8 +1,5 @@
-import os
-import sys
-sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
-
 from dataprovide.data_provider_by_id import DataProviderByID
+from propertise.propertise_loader import PropertiseLoader
 import yaml
 import abc
 import os.path
@@ -34,9 +31,8 @@ class DataProviderByIDFromDir(DataProviderByID):
         pass
 
     def __load_dir_location(self):
-        with open(os.path.dirname(__file__) + '/../../propertise.yaml') as f:
-            propertise = yaml.full_load(f)
-            self._dir_location = propertise['location'][self.__type]
+        propertise = PropertiseLoader().get()
+        self._dir_location = propertise['location'][self.__type]
 
     def __make_file_location(self):
         sub_dir = str(self.image_num() // 10000)
