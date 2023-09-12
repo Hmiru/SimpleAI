@@ -1,7 +1,3 @@
-import os
-import sys
-sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
-
 from repository.dataset.dataset_repository import DatasetRepositry
 from repository.dataset.data_dto import DataDTO, DatasetDTO
 from pymysql.connections import Connection
