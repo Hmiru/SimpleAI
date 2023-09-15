@@ -2,17 +2,18 @@ from pymysql import connect
 from datarecord.mysql_recorder_from_dir_with_id import MySQLRecorderFromDirWithID
 from repository.dataset.mysql_dataset_repository import MySQLDatasetRepository
 from dataprovide.Image_data_provider_by_many_id_from_mysql import ImageDataProviderByManyIdFromMySQL
+from repository.database_manager import DatabaseManager
 import sys, os
 
 def main():
-    db = connect(host = "mysql", user = "root", password = "1234", database = "model_db")
+    db = DatabaseManager().get()
     for i in range(1, 100):
         # print("Record id {}".format(i))
         MySQLRecorderFromDirWithID(i, db).record()
 
     db.commit()
 
-    img_ids = [2, 24, 5, 55, 62]
+    img_ids = [2, 24, 5, 55, 62, 33, 23, 13]
     image_provider = ImageDataProviderByManyIdFromMySQL(img_ids, db)
 
     image_dtos = image_provider.get()
