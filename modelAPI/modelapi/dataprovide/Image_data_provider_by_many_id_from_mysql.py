@@ -6,11 +6,9 @@ from PIL import Image
 from pymysql.connections import Connection
 
 class ImageDataProviderByManyIdFromMySQL(DataProviderByManyIDFromMySQL):
-    __image_dataset: ImageDatasetDTO
-    
     def __init__(self, ids: list[int], db: Connection):
         super().__init__(ids, db)
-        self.__image_dataset = []
+        self.__image_dataset: ImageDatasetDTO = []
         self.__make_image_dataset()
 
     def __make_image_dataset(self):
