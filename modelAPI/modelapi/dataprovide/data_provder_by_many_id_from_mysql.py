@@ -4,14 +4,11 @@ from repository.dataset.mysql_dataset_repository import MySQLDatasetRepository
 from repository.dataset.data_dto import DataDTO, DatasetDTO
 from copy import deepcopy
 
-class DataProviderByManyIDFromMySQL(DataProviderByManyID):
-    __repo: MySQLDatasetRepository
-    __loaded_dataset: DatasetDTO
-    
+class DataProviderByManyIDFromMySQL(DataProviderByManyID):  
     def __init__(self, ids: list[int], db: Connection):
         super().__init__(ids)
         self.__repo = MySQLDatasetRepository(db)
-        self.__loaded_dataset = self.__repo.get_list(ids)
+        self.__loaded_dataset: DatasetDTO = self.__repo.get_list(ids)
 
     def loaded_dataset(self):
         return deepcopy(self.__loaded_dataset)

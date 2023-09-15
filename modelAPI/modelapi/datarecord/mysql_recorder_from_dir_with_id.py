@@ -3,10 +3,6 @@ from repository.dataset.mysql_dataset_repository import MySQLDatasetRepository, 
 from pymysql.connections import Connection
 
 class MySQLRecorderFromDirWithID(DataRecorderFromDirWithID):
-    __repository: MySQLDatasetRepository
-    __db: Connection
-    __dto: DataDTO
-    
     def __init__(self, id: int, db: Connection):
         super().__init__(id)
         self.__db = db

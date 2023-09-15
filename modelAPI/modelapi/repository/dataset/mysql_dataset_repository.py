@@ -6,8 +6,6 @@ from pymysql.cursors import Cursor
 class MySQLDatasetRepository(DatasetRepositry):
     __SCHEMA = "model_db"
     __TABLE = "dataset"
-    __connection: Connection
-    __cursor: Cursor
 
     __INSERT_QUERY = "INSERT INTO " + __TABLE + " (label, image_location) VALUES (%s, %s)"
     __SELECT_QUERY_BASE = "SELECT label, image_location FROM " +__TABLE

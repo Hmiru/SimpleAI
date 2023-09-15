@@ -2,9 +2,6 @@ from repository.dataset.data_dto import DataDTO, DatasetDTO
 import abc
 
 class DatasetRepositry:
-    def __init__(self):
-        pass
-
     @abc.abstractmethod
     def insert(self, dto: DataDTO)->int:
         raise NotImplemented

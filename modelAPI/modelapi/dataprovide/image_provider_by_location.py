@@ -3,12 +3,12 @@ from propertise.propertise_loader import PropertiseLoader
 from PIL import Image, UnidentifiedImageError
 
 class ImageProviderByLocation(DataProvider):
-    __relative_location: str
-    __absolute_location: str
-    __image: Image
     
     def __init__(self, relative_location: str):
-        self.__relative_location = relative_location
+        self.__relative_location: str = relative_location
+        self.__image : Image
+        self.__absolute_location: str
+        
         self.__make_abs_location()
         self.__load_image()
 
