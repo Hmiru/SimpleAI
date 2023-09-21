@@ -1,0 +1,30 @@
+services:
+  python:
+    image: iamjunhee/phototimestamp-modelapi:latest
+    build: .
+    volumes:
+      - type: bind
+        source: ./modelAPI
+        target: /root/src/modelAPI
+      - type: bind
+        source: /home/junhee0110/Phototimestamp_data/mirflickr/
+        target: /root/data
+    networks:
+      - pysql
+    depends_on:
+      - mysql
+
+  mysql:
+    image: mysql:latest
+    volumes:
+      - type: bind
+        source: ./MySQL_dev/
+        target: /docker-entrypoint-initdb.d/
+    environment:
+      - MYSQL_ROOT_PASSWORD=$MYSQL_ROOT_PASSWORD
+    networks:
+      - pysql
+
+networks:
+  pysql:
+    driver: bridge
