@@ -1,6 +1,6 @@
 __pycache__
 propertise.yaml
-.env
+modelAPI/modelapi/dataprovide/.env
 MySQL_dev/db/*
 
 temp_resource

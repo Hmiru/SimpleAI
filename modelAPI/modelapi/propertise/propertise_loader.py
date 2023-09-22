@@ -18,7 +18,7 @@ class PropertiseLoader:
         
     def __load_propertise_file(self):
         project_path = os.path.dirname(sys.argv[0])
-        propertise_path = project_path + "/../propertise.yaml"
+        propertise_path = project_path + "\\..\\propertise.yaml"
         with open(propertise_path) as f:
             self.__propertise = yaml.full_load(f)
 
