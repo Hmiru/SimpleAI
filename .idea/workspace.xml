@@ -204,12 +204,12 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Python.main" />
       <item itemvalue="Python.image_info_extractor (1)" />
-      <item itemvalue="Python.label_classifier_from_filename" />
       <item itemvalue="Python.image_info_extractor" />
-      <item itemvalue="Python.test (2)" />
       <item itemvalue="Python.image_provider_by_location" />
+      <item itemvalue="Python.label_classifier_from_filename" />
+      <item itemvalue="Python.main" />
+      <item itemvalue="Python.test (2)" />
     </list>
     <recent_temporary>
       <list>
