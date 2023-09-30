@@ -29,7 +29,7 @@ class EXIFProviderByIDFromDir(DataProviderByIDFromDir):
 
             self.__EXIF[key] = value
 
-    def get(self):
+    def get_exif(self):
         return self.__EXIF
 
 

@@ -1,5 +1,5 @@
 
-from image_info_extractor import *
+from modelAPI.modelapi.dataprovide.datetime_provider_by_image_location import *
 from labelclassify.label_classifier_from_boundary import *
 class LabelClassifierFromFilename():
     def __init__(self,filename: str):

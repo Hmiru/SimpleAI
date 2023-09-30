@@ -1,3 +1,4 @@
+import os
 
 from dataprovide.data_provider import DataProvider
 from propertise.propertise_loader import PropertiseLoader
@@ -10,7 +11,8 @@ class ImageProviderByLocation(DataProvider):
         self.__image : Image
         self.__absolute_location: str
         self.__make_abs_location()
-        self.__load_image()
+        if os.path.isfile(self.__absolute_location):
+            self.__load_image()
 
     def __make_abs_location(self):
         propertise = PropertiseLoader().get()
@@ -20,5 +22,9 @@ class ImageProviderByLocation(DataProvider):
     def __load_image(self):
         self.__image = Image.open(self.__absolute_location)
 
-    def get(self)->Image:
+    def get_image(self)->Image:
         return self.__image
+
+    def get_path(self)->str:
+        return self.__absolute_location
+
