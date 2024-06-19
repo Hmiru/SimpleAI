@@ -53,7 +53,7 @@ import itertools
 
 from tensorflow import keras
 import sys
-sys.path.append('/root/data/code-space/PhotoTimestamp-AI/pipeline/model_wiki')
+sys.path.append('C:/Users/mirun/PycharmProjects/PhotoTimestamp-AI/pipeline/model_wiki')
 from VGG_16 import straight_vgg16 
 from VGG16_fine_tuned import tuning_vgg16
 

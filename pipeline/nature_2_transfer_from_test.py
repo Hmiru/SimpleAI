@@ -1,8 +1,8 @@
-from test import Pipeline
+from src.test import Pipeline
 
 def main():
     dataset_path = "/root/data/images/test_daytime"
-    classifier = Pipeline(datgaset_path)
+    classifier = Pipeline(dataset_path)
     classifier.load_datasets()
     classifier.preprocess()
     classifier.model_build(2)

@@ -1,7 +1,7 @@
-from test import Pipeline
+from src.test import Pipeline
 
 def main():
-    dataset_path = "/root/data/images/25k/images"
+    dataset_path = "C:/Users/mirun/image_dataset/photo_timestamp/real/korea_Phototimestamp_ds"
     classifier = Pipeline(dataset_path)
     classifier.load_datasets()
     classifier.preprocess()

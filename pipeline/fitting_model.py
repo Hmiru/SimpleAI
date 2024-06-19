@@ -13,11 +13,11 @@ class ModelTrainer:
         #self.compile()
 
     def compile(self):
-        optimizer = optimizer = keras.optimizers.legacy.Adam(learning_rate=0.0001, decay=1e-6)
+        optimizer = optimizer = keras.optimizers.Adam(learning_rate=0.0001, decay=1e-6)
         self.model.compile(loss='categorical_crossentropy', optimizer=optimizer, metrics=['accuracy'])
 
     def fit(self, train_ds, valid_ds, epochs):
-        checkpointer = ModelCheckpoint(filepath=f'/root/data/code-space/PhotoTimestamp-AI/model_storage/nature_divide_model.{epochs}epochs.hdf5', verbose=1, save_best_only=True)
+        checkpointer = ModelCheckpoint(filepath=f'C:/Users/mirun/PycharmProjects/PhotoTimestamp-AI/pipeline/weight/season_predictor_with_{epochs}epochs.hdf5', verbose=1, save_best_only=True)
         reduce_lr = tf.keras.callbacks.ReduceLROnPlateau(monitor='val_loss', factor=0.2,
                                                           patience=5, min_lr=0.0001)
         history = self.model.fit(train_ds,

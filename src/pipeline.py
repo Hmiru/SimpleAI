@@ -20,7 +20,7 @@ class Pipeline:
         self.train_ds = None
         self.model = None
         self.image_info = ImageInfo(image_height=224, image_width=224)
-        with open('path_config.yaml', 'r',  encoding='utf-8') as file:
+        with open('path_config.yaml', 'r', encoding='utf-8') as file:
             config = yaml.safe_load(file)
         handphone_image_path_from_yaml = config['handphone_image_path']
         # animal_face_image_path_from_yaml = config['animal_face_image_path']
